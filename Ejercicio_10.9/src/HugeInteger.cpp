@@ -118,49 +118,43 @@ bool HugeInteger::operator!=(const HugeInteger& o) const
 
 bool HugeInteger::operator>(const HugeInteger& o) const {
 
-     for ( int i=0; i < digits-1; ++i) {
-         if (integer[i] < o.integer[i]) {
-            return false;
-            break;
-        }
-        return true;
+    int i=0,cont=0;
+     while(i<digits-1) {
+         if(integer[i]==o.integer[i])
+         {
+            i++;
+            cont++;
+         }
+         else if(integer[i]>o.integer[i])
+         {
+             return true;
+             i++;
+         }
+         else if(integer[i]<o.integer[i])
+         {
+             return false;
+             i++;
+         }
     }
+
 }
 
 
 bool HugeInteger::operator<(const HugeInteger& o) const {
 
-     for ( int i=0; i < digits-1; ++i) {
-         if (integer[i] < o.integer[i]) {
-            return true;
-            break;
-        }
-        return false;
-        break;
-    }
+     return !(*this > o);
 }
 
 bool HugeInteger::operator>=(const HugeInteger& o) const {
-
-     for ( int i=0; i < digits-1; ++i) {
-         if ((integer[i] != o.integer[i])||(integer[i] > o.integer[i])) {
-         return false;
-        }
-    }
-     return true;
+    if((*this > o)||(*this == o))
+        return true;
 }
 
 bool HugeInteger::operator<=(const HugeInteger& o) const {
+    return !(*this > o);
+    return !(*this == o);
 
-     for ( int i=0; i < digits-1; ++i) {
-         if ((integer[i] != o.integer[i])||(integer[i] < o.integer[i])) {
-         return false;
-        }
-    }
-     return true;
 }
-
-
 
 
 
